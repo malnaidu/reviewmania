@@ -11791,12 +11791,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">overalls</span><span class="p">))))</span>
 <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">]</span>
 <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span>
+<span class="n">df</span><span class="o">.</span><span class="n">review</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">review</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -11806,7 +11807,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -11820,7 +11821,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[32]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -11835,27 +11836,27 @@ div#notebook {
   <tbody>
     <tr>
       <th>0</th>
-      <td>Wonderful time- even with the snow! What a gre...</td>
+      <td>wonderful time- even with the snow! what a gre...</td>
       <td>5</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Lovely hotel, unique decor, friendly front des...</td>
+      <td>lovely hotel, unique decor, friendly front des...</td>
       <td>4</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Nice hotel, expensive parking We got a good de...</td>
+      <td>nice hotel, expensive parking we got a good de...</td>
       <td>4</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Fabulous hotel Location and service are great....</td>
+      <td>fabulous hotel location and service are great....</td>
       <td>5</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Loved the Monaco! Staff was amazing, with a sm...</td>
+      <td>loved the monaco! staff was amazing, with a sm...</td>
       <td>5</td>
     </tr>
   </tbody>
@@ -11880,7 +11881,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">review</span><span class="o">.</span><span class="n">values</span>
@@ -11906,7 +11907,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">TfidfVectorizer</span>
@@ -11948,7 +11949,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">TruncatedSVD</span>
@@ -11984,6 +11985,35 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_test</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">X_test_lsa</span> <span class="o">=</span> <span class="n">lsa</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;5&#39; &#39;5&#39; &#39;4&#39; ..., &#39;2&#39; &#39;4&#39; &#39;5&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11995,22 +12025,68 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
 
 <span class="n">regr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
 
-<span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_lsa</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficients: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">regr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean squared error: </span><span class="si">%.2f</span><span class="s2">&quot;</span>
-      <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> <span class="o">-</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Variance score: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">regr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<span class="n">regr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test_lsa</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Coefficients: 
+ [  4.23005664e-01   1.32098213e+00   7.29767599e-01   1.93934366e+00
+  -7.90722354e-01   1.41438823e+00  -3.11999934e+00   2.68990032e-01
+   5.58773057e-01  -1.17654815e+00  -5.65755701e-01  -1.14203620e+00
+  -8.62445829e-01   9.08013965e-01   8.12981884e-02  -5.87930207e-01
+  -4.23126887e-01  -1.50860787e+00   7.24193670e-01   1.77343167e+00
+   9.19187632e-03  -1.18011088e+00  -8.78988951e-01   5.16940127e-01
+  -8.17495598e-01   3.80497398e-01   5.32273121e-01   7.92438512e-01
+  -2.69034593e-01   4.43871267e-01  -7.40332867e-01  -6.12391460e-01
+   4.62553937e-01  -1.18871484e-01  -7.58865181e-01   2.71833054e-01
+   4.89499057e-01   6.29505134e-02   7.55690522e-01  -7.06524690e-01
+  -4.46667256e-01   4.11847786e-01  -1.97332683e-01  -2.13719453e-02
+   1.53541541e-01   6.48619527e-02   5.76589398e-01  -7.41529395e-02
+   5.21346988e-01   9.13367563e-01  -7.08104815e-01   7.39030495e-01
+   3.01328625e-01   1.49583147e-02  -3.96178267e-01  -1.33757585e-01
+  -1.43713615e-01  -6.57416684e-01   1.80802131e-01  -4.16292503e-01
+  -2.30689119e-01  -6.90655798e-01  -5.59509290e-01  -6.85616754e-01
+   1.36040155e-01  -3.63938899e-01  -4.76554871e-01   7.01822710e-04
+   6.84340359e-02  -4.98551852e-01  -7.95739258e-01   4.49091000e-01
+   6.48920306e-01   6.98732218e-02   5.58339207e-01   3.93865974e-02
+   1.26767423e-01  -6.33803470e-02  -1.66930252e-01  -3.77722502e-01
+  -4.02098942e-01  -4.13434000e-01   3.72476681e-01   1.86330685e-01
+  -1.62245918e-01  -4.99143089e-01  -2.62897082e-01   1.22825936e+00
+   7.21089933e-02   9.61011896e-01  -4.30150202e-01  -2.77614765e-01
+   1.63781413e-01  -8.38063276e-02   9.30905866e-01  -8.30564168e-02
+  -1.30421219e-01   4.75762622e-02  -4.22908954e-01   1.32917247e-01]
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[40]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.44096047332876276</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
